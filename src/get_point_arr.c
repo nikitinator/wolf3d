@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_point_arr.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: snikitin <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/04/18 14:44:55 by snikitin          #+#    #+#             */
+/*   Updated: 2018/04/18 14:44:56 by snikitin         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "wolf3d.h"
 
 static void		set_point_xyz(t_point *p, int x, int y, int z)
@@ -7,35 +19,24 @@ static void		set_point_xyz(t_point *p, int x, int y, int z)
 	(*p)[Z] = z;
 }
 
-static void		set_point_clr(t_point *p, char *token)
-{
-	char *color;
-
-	if (((color = ft_strchr(token, ','))) && ft_strnequ(",0x", color, 3))
-		(*p)[PNT_CLR] = (float)ft_atoi_base(color + 3, 16);
-	else
-		(*p)[PNT_CLR] = (float)WHITE;
-}
-
-static int		set_arr(t_pntarr *parr, t_list *begin_list)
+static int		set_arr(size_t row, size_t col, t_list *begin_list)
 {
 	size_t	i;
 	size_t	j;
-	char	**tokens;
+	t_byte	**tokens;
 
 	j = 0;
-	if (!(parr->arr = malloc(parr->row * sizeof(t_point *))))
-		return (-1);
+	if (!(parr->arr = malloc(row * sizeof(t_byte *))))
+		return (1);
 	while (begin_list)
 	{
 		tokens = *(char ***)begin_list->content;
-		if (!(parr->arr[j] = malloc(parr->col * sizeof(t_point))))
-			return (-1);
+		if (!(map[j] = malloc(col * sizeof(char))))
+			return (1);
 		i = 0;
 		while (tokens[i])
 		{
-			set_point_xyz(&parr->arr[j][i], i, j, -ft_atoi(tokens[i]));
-			set_point_clr(&parr->arr[j][i], tokens[i]);
+			map[j][i] = ft_atoi(tokens[i]);
 			free(tokens[i]);
 			i++;
 		}
@@ -46,21 +47,18 @@ static int		set_arr(t_pntarr *parr, t_list *begin_list)
 	return (0);
 }
 
-void			get_point_arr(t_pntarr *parr, t_fdf *fdf,
-		t_list *begin_list)
+t_byte		**get_point_arr(size_t col_n, size_t row_n, t_list *begin_list)
 {
-	t_list *temp;
+	t_list	*temp;
+	t_byte	**map;
 
 	temp = begin_list;
-	if ((set_arr(parr, begin_list)))
+	if ((map = set_arr(col_n, row_n, begin_list)))
 	{
 		list_free(temp);
 		ft_lstdel(&temp, del_content);
-		exit_fdf(fdf);
+		return (NULL);
 	}
 	ft_lstdel(&temp, del_content);
-	parr->center[X] = (parr->col - 1) * XY_COORD_MUL / 2.0;
-	parr->center[Y] = (parr->row - 1) * XY_COORD_MUL / 2.0;
-	parr->center[Z] = 0;
-	return ;
+	return (map);
 }

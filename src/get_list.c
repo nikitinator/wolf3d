@@ -5,12 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: snikitin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/02/07 15:49:41 by snikitin          #+#    #+#             */
-/*   Updated: 2018/04/13 18:17:05 by snikitin         ###   ########.fr       */
+/*   Created: 2018/04/18 14:54:15 by snikitin          #+#    #+#             */
+/*   Updated: 2018/04/18 15:30:10 by snikitin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "wolf3d.h"
 
 void		del_content(void *content, size_t content_size)
 {
@@ -43,7 +43,7 @@ void		list_free(t_list *list)
 
 void		*del_return(t_list *list)
 {
-	ft_putendl_fd("Invalid argument", 2);
+	ft_putendl_fd("Invalid map", 2);
 	list_free(list);
 	return (NULL);
 }
@@ -54,8 +54,6 @@ t_list		*get_list(int fd, size_t *column_num, size_t *row_num)
 	char	**split;
 	t_list	*begin_list;
 
-	*column_num = 0;
-	*row_num = 0;
 	begin_list = NULL;
 	while (get_next_line(fd, &line) > 0)
 	{
@@ -63,16 +61,16 @@ t_list		*get_list(int fd, size_t *column_num, size_t *row_num)
 		{
 			if (*column_num == 0)
 				*column_num = ft_cntwrd(line);
-			else if (*column_num != ft_cntwrd(line))
+			else if (ft_cntwrd(line) != *column_num)
 			{
 				free(line);
 				return (del_return(begin_list));
 			}
-			split = ft_strsplit(line, ' ');
+			split = ft_strsplit(line, ' ');// protect?
 			ft_list_push_back(&begin_list, &split, sizeof(char ***));
 		}
-		(*row_num)++;
+		*row_num += 1;
 		free(line);
 	}
-	return (validate_list(begin_list));
+	return (validate_list(begin_list, *column_num, *row_num));
 }
