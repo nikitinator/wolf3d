@@ -6,7 +6,7 @@
 #    By: snikitin <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/02/07 17:36:11 by snikitin          #+#    #+#              #
-#    Updated: 2018/04/17 17:56:23 by snikitin         ###   ########.fr        #
+#    Updated: 2018/04/18 19:18:26 by snikitin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,8 +21,14 @@ LIB_DIR := ./lib/
 FRM_DIR := ./frm/
 
 SRC :=	main.c\
+		read_map.c\
+		get_list.c\
+		list_free.c\
+		get_point_arr.c\
 		update_game.c\
+		update_img.c\
 		update_window.c\
+		
 
 OBJ = $(addprefix $(OBJ_DIR), $(SRC:.c=.o))
 INC = $(INC_DIR)wolf3d.h 

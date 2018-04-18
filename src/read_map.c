@@ -6,7 +6,7 @@
 /*   By: snikitin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/16 17:25:28 by snikitin          #+#    #+#             */
-/*   Updated: 2018/04/18 14:57:47 by snikitin         ###   ########.fr       */
+/*   Updated: 2018/04/18 18:52:43 by snikitin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,13 @@ t_byte	**read_map(void)
 
 	col_num = 0;
 	row_num = 0;
-	if (!(fd = open(MAP_LOCATION, O_RDONLY)) <= 0)
+	if ((fd = open(MAP_PATH, O_RDONLY)) <= 0)
+	{
+		ft_putendl_fd("map.txt not found", 2);
 		return (NULL);
+	}
 	if (!(map_lines = get_list(fd, &col_num, &row_num)))
 		return (NULL);
-	return (get_point_arr(col_num, row_num, map_lines));
+		ft_putendl("test");
+	return (get_point_arr(map_lines, col_num, row_num));
 }

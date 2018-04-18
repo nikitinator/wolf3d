@@ -6,46 +6,50 @@
 /*   By: snikitin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/18 14:54:15 by snikitin          #+#    #+#             */
-/*   Updated: 2018/04/18 15:30:10 by snikitin         ###   ########.fr       */
+/*   Updated: 2018/04/18 18:27:32 by snikitin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
 
-void		del_content(void *content, size_t content_size)
+int			is_number(char *str)
 {
-	ft_bzero(content, content_size);
-	free(content);
+	while (*str)
+	{
+		if (!ft_isdigit(*str))
+			return (0);
+		str++;
+	}
+	return (1);
 }
 
-void		list_free(t_list *list)
+t_list		*validate_list(t_list *list, size_t col, size_t num)
 {
 	char	**tokens;
 	t_list	*list_copy;
-	int		i;
+	size_t	i;
 
 	list_copy = list;
+	if (col <= 2 || num <= 2)
+		return (del_return(list_copy));
 	while (list)
 	{
 		tokens = *(char ***)list->content;
 		i = 0;
 		while (tokens[i])
 		{
-			free(tokens[i]);
+			if (!is_number(tokens[i]))
+			{
+				ft_putendl_fd("Invalid map1", 2);
+				list_free(list_copy);
+				return (NULL);
+				//return (del_return(list_copy));
+			}
 			i++;
 		}
-		free(tokens);
 		list = list->next;
 	}
-	if (list_copy)
-		ft_lstdel(&list_copy, del_content);
-}
-
-void		*del_return(t_list *list)
-{
-	ft_putendl_fd("Invalid map", 2);
-	list_free(list);
-	return (NULL);
+	return (list_copy);
 }
 
 t_list		*get_list(int fd, size_t *column_num, size_t *row_num)
@@ -67,7 +71,7 @@ t_list		*get_list(int fd, size_t *column_num, size_t *row_num)
 				return (del_return(begin_list));
 			}
 			split = ft_strsplit(line, ' ');// protect?
-			ft_list_push_back(&begin_list, &split, sizeof(char ***));
+			ft_list_push_back(&begin_list, &split, sizeof(char ***));//two stars?
 		}
 		*row_num += 1;
 		free(line);

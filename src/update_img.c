@@ -1,33 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   update_game.c                                      :+:      :+:    :+:   */
+/*   update_img.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: snikitin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/17 17:57:03 by snikitin          #+#    #+#             */
-/*   Updated: 2018/04/18 20:28:49 by snikitin         ###   ########.fr       */
+/*   Created: 2018/04/18 19:04:05 by snikitin          #+#    #+#             */
+/*   Updated: 2018/04/18 20:37:22 by snikitin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
 
-int		update_game(t_player *plr, char *color)
+Uint32	*update_img(t_player plr, Uint32 *img_arr)
 {
-	SDL_Event		e;
-	
-	const Uint8 *keystates = SDL_GetKeyboardState(NULL); // rewrite it maybe =0
-
 	(void)plr;
-	while (SDL_PollEvent(&e))
+	short	i;
+	i = 0;
+	ft_bzero(img_arr, sizeof(Uint32) * 4 * SCR_WIDTH * SCR_HEIGHT);
+	//ft_memset(img_arr, 125, 3 * SCR_WIDTH * SCR_HEIGHT);
+	while (i < SCR_WIDTH)
 	{
-		if (e.type == SDL_QUIT || (e.type == SDL_KEYDOWN && e.key.keysym.sym ==
-				SDLK_ESCAPE))
-			return (1);	
-		if(keystates[SDL_SCANCODE_UP])
-			*color = *color + 25;
-        if(keystates[SDL_SCANCODE_DOWN])
-			*color = *color - 25;
+		i++;
 	}
-	return (0);
+	return(img_arr);
 }
