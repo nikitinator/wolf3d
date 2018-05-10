@@ -6,11 +6,9 @@
 #    By: snikitin <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/02/07 17:36:11 by snikitin          #+#    #+#              #
-#    Updated: 2018/04/18 19:18:26 by snikitin         ###   ########.fr        #
+#    Updated: 2018/05/02 16:26:08 by snikitin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
-
-#gcc 01_hello_SDL.cpp  -F ../ -framework SDL2 -o 01_hello_SDL -rpath ../ -I ../SDL2.framework/Headers/
 
 NAME := wolf3d         
 
@@ -28,8 +26,9 @@ SRC :=	main.c\
 		update_game.c\
 		update_img.c\
 		update_window.c\
+		vector.c\
+		cast_ray.c\
 		
-
 OBJ = $(addprefix $(OBJ_DIR), $(SRC:.c=.o))
 INC = $(INC_DIR)wolf3d.h 
 
@@ -43,7 +42,7 @@ SDL_DIR = $(FRM_DIR)SDL2.framework/
 SDL_INC = $(SDL_DIR)Headers/
 SDL_FLAGS = $(SDL) -rpath $(FRM_DIR)
 
-CC_FLAGS := -Wall -Wextra -Werror -O3
+CC_FLAGS := -Wall -Wextra -Werror -g
 LINK_FLAGS := $(LIBFT_FLAGS) $(SDL_FLAGS)
 HEADER_FLAGS := -I $(LIBFT_INC) -I $(SDL_INC) -I $(INC_DIR)
 
@@ -58,6 +57,7 @@ $(OBJ): | $(OBJ_DIR)
 
 $(OBJ_DIR):
 	mkdir $(OBJ_DIR)
+
 # $(INC)
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c $(INC)
 	$(CC) -c $< -o $@ $(CC_FLAGS) $(HEADER_FLAGS)

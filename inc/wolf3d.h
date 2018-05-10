@@ -6,23 +6,65 @@
 /*   By: snikitin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/09 14:21:53 by snikitin          #+#    #+#             */
-/*   Updated: 2018/04/18 20:28:21 by snikitin         ###   ########.fr       */
+/*   Updated: 2018/05/10 18:35:46 by snikitin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef WOLF3D
 # define WOLF3D
 
-# define MOV_COEFF 0.5
+# define MOV_COEFF 0.4 
+# define ROT_COEFF M_PI/180*4 
 
 # define SCR_WIDTH 1680//2560
 # define SCR_HEIGHT 1050//1440 
 # define SCR_BPP 32
+# define WALL_SIZE 64
+
+# define NORTH 0
+# define SOUTH 1
+# define EAST 2
+# define WEST 3
 
 # define X 0
 # define Y 1
 
+# define RR 0
+# define GG 1
+# define BB 2
+
+# define TEXTURE_NUM 8
+# define TEXTURE_HEIGHT 64
+# define TEXTURE_WIDTH 64
+
 # define MAP_PATH "./res/map.txt"
+
+# define BLUESTONE 0
+# define COLORSTONE 1
+# define EAGLE 2
+# define GREYSTONE 3
+# define MOSSY 4
+# define PURPLESTONE 5
+# define REDBRICK 6
+# define WOOD 7
+
+# define BLUESTONE_PATH "./res/pics/bluestone.bmp"
+# define COLORSTONE_PATH "./res/pics/colorstone.bmp"
+# define EAGLE_PATH "./res/pics/eagle.bmp"
+# define GREYSTONE_PATH "./res/pics/greystone.bmp"
+# define MOSSY_PATH "./res/pics/mossy.bmp"
+# define PURPLESTONE_PATH "./res/pics/purplestone.bmp"
+# define REDBRICK_PATH "./res/pics/redbrick.bmp"
+# define WOOD_PATH "./res/pics/wood.bmp"
+
+# define GET_PIX(x, y, i) *(Uint32 *)(i + x + y * 64)
+//# define SET_PIX(x, y, i, c) *(Uint32 *)(i + x + y * SCR_WIDTH) = c
+
+# define TRUECHK(x) if (x) return (1);//
+
+# define SET_PIX(x, y, i, c) i[x + y * SCR_WIDTH] = c
+# define RADIAN(angle) (M_PI/180*(angle))
+# define SQR(n) ((n) * (n))
 
 # include <SDL.h>
 # include <stdio.h>//
@@ -35,6 +77,20 @@ typedef unsigned short t_ushort;
 
 typedef double	t_vector_2 __attribute__((vector_size(sizeof(double)*2)));
 typedef double	t_vector_3 __attribute__((vector_size(sizeof(double)*3)));
+
+typedef union		u_color
+{
+	unsigned int	c_32;
+	unsigned char	c_8[3];
+}					t_color;
+
+typedef struct	s_hitpoint
+{
+	t_byte		type;
+	double		distance;
+	double		x_ratio;
+	int			sotw;
+}				t_hitpoint;
 
 typedef struct	s_player
 {
@@ -61,10 +117,20 @@ void	list_free(t_list *list);
 void	del_content(void *content, size_t content_size);
 void	*del_return(t_list *list);
 
+double		vec_dot_product(t_vector_2 a, t_vector_2 b);
+double		vec_magnitude(t_vector_2 v);
+double		vec_angle(t_vector_2 a, t_vector_2 b);
+double		vec_mod_tg(t_vector_2 v);
+double		vec_mod_ctg(t_vector_2 v);
 
-int		update_game(t_player *plr, char *color);
-Uint32	*update_img(t_player plr, Uint32 *img_arr);
+t_vector_2	vec_rotate(t_vector_2 vector, double radians);
+
+t_hitpoint	cast_ray(t_vector_2 position, t_vector_2 direction, t_byte **map);
+
+int		update_game(t_player *plr, t_byte **map);
+Uint32	*update_img(t_player plr, Uint32 *img_arr, t_byte **map, SDL_Surface **textures);
 void	update_window(Uint32 *img_arr, SDL_Texture *texture, SDL_Renderer *renderer);
 
 
 #endif
+
