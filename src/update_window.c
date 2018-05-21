@@ -6,7 +6,7 @@
 /*   By: snikitin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/17 17:54:50 by snikitin          #+#    #+#             */
-/*   Updated: 2018/04/28 18:39:37 by snikitin         ###   ########.fr       */
+/*   Updated: 2018/05/21 13:25:45 by snikitin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,6 @@ void	update_window(Uint32 *img_arr, SDL_Texture *texture, SDL_Renderer *renderer
 	SDL_UpdateTexture(texture, NULL, img_arr, SCR_WIDTH * sizeof(Uint32));
 	SDL_RenderCopy(renderer, texture, NULL, NULL);
 	SDL_RenderPresent(renderer);
-	//SDL_RenderClear(renderer);
+	SDL_RenderClear(renderer);
 }
 

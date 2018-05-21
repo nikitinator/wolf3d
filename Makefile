@@ -6,7 +6,7 @@
 #    By: snikitin <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/02/07 17:36:11 by snikitin          #+#    #+#              #
-#    Updated: 2018/05/02 16:26:08 by snikitin         ###   ########.fr        #
+#    Updated: 2018/05/21 18:01:44 by snikitin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,7 @@ SRC :=	main.c\
 		update_window.c\
 		vector.c\
 		cast_ray.c\
+		draw.c
 		
 OBJ = $(addprefix $(OBJ_DIR), $(SRC:.c=.o))
 INC = $(INC_DIR)wolf3d.h 

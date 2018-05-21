@@ -6,13 +6,13 @@
 /*   By: snikitin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/18 14:44:55 by snikitin          #+#    #+#             */
-/*   Updated: 2018/04/18 18:51:23 by snikitin         ###   ########.fr       */
+/*   Updated: 2018/05/21 13:16:50 by snikitin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
 
-t_byte		**set_arr(t_list *begin_list, size_t row, size_t col)
+t_byte		**create_arr(t_list *begin_list, size_t row, size_t col)
 {
 	size_t	i;
 	size_t	j;
@@ -47,12 +47,7 @@ t_byte		**get_point_arr(t_list *begin_list, size_t col_n, size_t row_n)
 	t_byte	**map;
 
 	temp = begin_list;
-	if (!(map = set_arr(begin_list, col_n, row_n)))
-	{
-		ft_lstdel(&temp, del_content);
-		//list_free(temp);
-		return (NULL);
-	}
+	map = create_arr(begin_list, col_n, row_n);
 	ft_lstdel(&temp, del_content);
 	return (map);
 }

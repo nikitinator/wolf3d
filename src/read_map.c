@@ -6,7 +6,7 @@
 /*   By: snikitin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/16 17:25:28 by snikitin          #+#    #+#             */
-/*   Updated: 2018/04/18 18:52:43 by snikitin         ###   ########.fr       */
+/*   Updated: 2018/05/21 13:18:02 by snikitin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,5 @@ t_byte	**read_map(void)
 	}
 	if (!(map_lines = get_list(fd, &col_num, &row_num)))
 		return (NULL);
-		ft_putendl("test");
 	return (get_point_arr(map_lines, col_num, row_num));
 }

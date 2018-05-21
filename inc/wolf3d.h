@@ -6,24 +6,29 @@
 /*   By: snikitin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/09 14:21:53 by snikitin          #+#    #+#             */
-/*   Updated: 2018/05/10 18:35:46 by snikitin         ###   ########.fr       */
+/*   Updated: 2018/05/21 19:30:53 by snikitin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+
 #ifndef WOLF3D
 # define WOLF3D
+// check all defines do yo need em
 
-# define MOV_COEFF 0.4 
-# define ROT_COEFF M_PI/180*4 
+# define WALL_HEIGHT 1.0//
 
-# define SCR_WIDTH 1680//2560
-# define SCR_HEIGHT 1050//1440 
+# define MOV_COEFF 0.5 
+# define ROT_COEFF M_PI/180*5 
+# define FOV 60
+# define TAN30 0.57735026919//
+
+# define SCR_WIDTH 1680
+# define SCR_HEIGHT 1050
 # define SCR_BPP 32
-# define WALL_SIZE 64
 
 # define NORTH 0
-# define SOUTH 1
-# define EAST 2
+# define EAST 1
+# define SOUTH 2
 # define WEST 3
 
 # define X 0
@@ -33,11 +38,11 @@
 # define GG 1
 # define BB 2
 
+# define PLAYER_HEIGHT 0.5
+
 # define TEXTURE_NUM 8
 # define TEXTURE_HEIGHT 64
 # define TEXTURE_WIDTH 64
-
-# define MAP_PATH "./res/map.txt"
 
 # define BLUESTONE 0
 # define COLORSTONE 1
@@ -55,15 +60,21 @@
 # define MOSSY_PATH "./res/pics/mossy.bmp"
 # define PURPLESTONE_PATH "./res/pics/purplestone.bmp"
 # define REDBRICK_PATH "./res/pics/redbrick.bmp"
-# define WOOD_PATH "./res/pics/wood.bmp"
+# define WOOD_PATH "./res/pics/ceiling.bmp"
+
+# define MAP_PATH "./res/map.txt"
 
 # define GET_PIX(x, y, i) *(Uint32 *)(i + x + y * 64)
-//# define SET_PIX(x, y, i, c) *(Uint32 *)(i + x + y * SCR_WIDTH) = c
 
 # define TRUECHK(x) if (x) return (1);//
 
+#define	GET_PIX_TXT(x_ratio, y_ratio, texture)\
+			(*(Uint32 *)(texture->pixels \
+			+(int)((texture->w-1)*x_ratio)*3\
+			+(int)((texture->h-1)*y_ratio)*texture->pitch))
+
 # define SET_PIX(x, y, i, c) i[x + y * SCR_WIDTH] = c
-# define RADIAN(angle) (M_PI/180*(angle))
+# define RADIAN(angle) (M_PI/180.0*(angle))
 # define SQR(n) ((n) * (n))
 
 # include <SDL.h>
@@ -84,20 +95,41 @@ typedef union		u_color
 	unsigned char	c_8[3];
 }					t_color;
 
-typedef struct	s_hitpoint
+typedef struct	s_obst_drw
 {
-	t_byte		type;
-	double		distance;
+	long		from;
+	long		to;
 	double		x_ratio;
-	int			sotw;
-}				t_hitpoint;
+	SDL_Surface	*txt;
+}				t_obst_drw;
 
 typedef struct	s_player
 {
 	t_ushort	fov;
-	t_vector_2	pov;
-	t_vector_2	position;
+	t_vector_2	dir;
+	t_vector_2	pos;
 }				t_player;
+
+
+typedef struct	s_fc_drw
+{
+	t_player	plr;
+	double		dtpp;
+	long		from_txt;
+	long		to_txt;
+	t_vector_2	ray_dir;
+	short		x;
+	SDL_Surface **textures;
+	Uint32		*img_arr;
+}				t_fc_drw;
+
+typedef struct	s_hitpoint
+{
+	t_byte		type;
+	double		dist;
+	double		x_ratio;
+	t_byte		card_dir;
+}				t_hitpoint;
 
 typedef struct	s_map
 {
@@ -123,9 +155,12 @@ double		vec_angle(t_vector_2 a, t_vector_2 b);
 double		vec_mod_tg(t_vector_2 v);
 double		vec_mod_ctg(t_vector_2 v);
 
+void		draw_obstacle(t_obst_drw obst_drw, short x, Uint32 *img_arr);
+void		draw_ceil_floor(t_fc_drw fc_drw);
+
 t_vector_2	vec_rotate(t_vector_2 vector, double radians);
 
-t_hitpoint	cast_ray(t_vector_2 position, t_vector_2 direction, t_byte **map);
+t_hitpoint	cast_ray(t_vector_2 position, t_vector_2 dir, t_byte **map);
 
 int		update_game(t_player *plr, t_byte **map);
 Uint32	*update_img(t_player plr, Uint32 *img_arr, t_byte **map, SDL_Surface **textures);

@@ -6,7 +6,7 @@
 /*   By: snikitin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/17 17:57:03 by snikitin          #+#    #+#             */
-/*   Updated: 2018/05/08 13:32:27 by snikitin         ###   ########.fr       */
+/*   Updated: 2018/05/18 12:49:43 by snikitin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,11 @@
 void	print_player(t_player *plr)
 {
 	printf("fov: %d\n", plr->fov);
-	printf("plr->pov[X]: %f\n", plr->pov[X]);
-	printf("plr->pov[Y]: %f\n", plr->pov[Y]);
-	printf("plr->position[X]: %f\n", plr->position[X]);
-	printf("plr->position[Y]: %f\n", plr->position[Y]);
+	printf("plr->dir[X]: %f\n", plr->dir[X]);
+	printf("plr->dir[Y]: %f\n", plr->dir[Y]);
+	printf("plr->pos[X]: %f\n", plr->pos[X]);
+	printf("plr->pos[Y]: %f\n", plr->pos[Y]);
+	printf("magnitude plr->dir %f\n", vec_magnitude(plr->dir));
 	printf("\n");
 }
 
@@ -26,23 +27,13 @@ void	move_player_forward(t_player *player, t_byte **map)
 {
 	t_vector_2	new_position;
 
-	new_position = player->position;
-	new_position[Y] += player->pov[Y] * MOV_COEFF;
-	if (!map[(int)new_position[Y]][(int)player->position[X]])
-		player->position[Y] = new_position[Y];
-	new_position[X] += player->pov[X] * MOV_COEFF;		//potom uprastit, sprosit u senkki
-	if (!map[(int)player->position[Y]][(int)new_position[X]])
-		player->position[X] = new_position[X];
-	//else
-	//{
-	//	new_position = player->position; //sovet u seni po otnimaniu
-	//	new_position[X] += 1 * MOV_COEFF;
-	//	new_position[Y] += 1 * MOV_COEFF;
-	//	if (!map[(int)new_position[Y]][(int)player->position[X]])
-	//		player->position[Y] = new_position[Y];
-	//	if (!map[(int)player->position[Y]][(int)new_position[X]])
-	//		player->position[X] = new_position[X];
-	//}
+	new_position = player->pos;
+	new_position[Y] += player->dir[Y] * MOV_COEFF;
+	if (!map[(int)new_position[Y]][(int)player->pos[X]])
+		player->pos[Y] = new_position[Y];
+	new_position[X] += player->dir[X] * MOV_COEFF;
+	if (!map[(int)player->pos[Y]][(int)new_position[X]])
+		player->pos[X] = new_position[X];
 	print_player(player);
 }
 
@@ -50,23 +41,25 @@ void	move_player_backward(t_player *player, t_byte **map)
 {
 	t_vector_2	new_position;
 
-	new_position = player->position;
-	new_position[X] -= player->pov[X] * MOV_COEFF;		//potom uprastit, sprosit u senkki
-	new_position[Y] -= player->pov[Y] * MOV_COEFF;
-	if (!map[(int)new_position[Y]][(int)new_position[X]])
-		player->position = new_position;
+	new_position = player->pos;
+	new_position[Y] -= player->dir[Y] * MOV_COEFF;
+	if (!map[(int)new_position[Y]][(int)player->pos[X]])
+		player->pos[Y] = new_position[Y];
+	new_position[X] -= player->dir[X] * MOV_COEFF;
+	if (!map[(int)player->pos[Y]][(int)new_position[X]])
+		player->pos[X] = new_position[X];
 	print_player(player);
 }
 
 void	rotate_player_ckw(t_player *player)
 {
-	player->pov = vec_rotate(player->pov, ROT_COEFF);
+	player->dir = vec_rotate(player->dir, ROT_COEFF);
 		print_player(player);
 }
 
 void	rotate_player_cckw(t_player *player)
 {
-	player->pov = vec_rotate(player->pov, -ROT_COEFF);
+	player->dir = vec_rotate(player->dir, -ROT_COEFF);
 		print_player(player);
 }
 

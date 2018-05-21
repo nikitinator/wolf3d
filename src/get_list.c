@@ -6,7 +6,7 @@
 /*   By: snikitin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/18 14:54:15 by snikitin          #+#    #+#             */
-/*   Updated: 2018/04/18 18:27:32 by snikitin         ###   ########.fr       */
+/*   Updated: 2018/05/21 13:18:48 by snikitin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ t_list		*validate_list(t_list *list, size_t col, size_t num)
 				ft_putendl_fd("Invalid map1", 2);
 				list_free(list_copy);
 				return (NULL);
-				//return (del_return(list_copy));
 			}
 			i++;
 		}
