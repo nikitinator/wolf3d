@@ -6,7 +6,7 @@
 #    By: snikitin <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/02/07 17:36:11 by snikitin          #+#    #+#              #
-#    Updated: 2018/05/21 18:01:44 by snikitin         ###   ########.fr        #
+#    Updated: 2018/05/23 15:50:52 by snikitin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,14 +19,15 @@ LIB_DIR := ./lib/
 FRM_DIR := ./frm/
 
 SRC :=	main.c\
-		read_map.c\
-		get_list.c\
-		list_free.c\
-		get_point_arr.c\
+		map_read.c\
+		map_get_list.c\
+		map_list_free.c\
+		map_validate.c\
 		update_game.c\
 		update_img.c\
 		update_window.c\
 		vector.c\
+		vector_rotate.c\
 		cast_ray.c\
 		draw.c
 		

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   list_free.c                                        :+:      :+:    :+:   */
+/*   map_list_free.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: snikitin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/18 16:20:46 by snikitin          #+#    #+#             */
-/*   Updated: 2018/04/18 18:03:42 by snikitin         ###   ########.fr       */
+/*   Created: 2018/05/23 15:41:13 by snikitin          #+#    #+#             */
+/*   Updated: 2018/05/23 15:51:15 by snikitin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	del_content(void *content, size_t content_size)
 	free(content);
 }
 
-void		list_free(t_list *list)
+void	list_free(t_list *list)
 {
 	char	**tokens;
 	t_list	*list_copy;
@@ -39,11 +39,4 @@ void		list_free(t_list *list)
 	}
 	if (list_copy)
 		ft_lstdel(&list_copy, del_content);
-}
-
-void		*del_return(t_list *list)
-{
-	ft_putendl_fd("Invalid map", 2);
-	list_free(list);
-	return (NULL);
 }

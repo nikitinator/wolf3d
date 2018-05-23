@@ -6,31 +6,30 @@
 /*   By: snikitin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/07 18:21:36 by snikitin          #+#    #+#             */
-/*   Updated: 2018/05/21 18:57:32 by snikitin         ###   ########.fr       */
+/*   Updated: 2018/05/23 15:47:56 by snikitin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
 
-void	init_player(t_player *plr)//mind the position
+void	init_player(t_player *plr)
 {
 	plr->fov = FOV;
-
-	plr->dir[X]= 1;
-	plr->dir[Y]= 0;
-	plr->pos[X]= 3;
-	plr->pos[Y]= 3;
+	plr->dir[X] = 1;
+	plr->dir[Y] = 0;
+	plr->pos[X] = 1.5;
+	plr->pos[Y] = 1.5;
 }
 
-int		init_sdl_stuff(SDL_Window **window, SDL_Texture **texture, SDL_Renderer **renderer)
+int		init_sdl_stuff(t_drawer *drw)
 {
-	if (!(*window = SDL_CreateWindow( "wolf3d", SDL_WINDOWPOS_UNDEFINED,
+	if (!(drw->window = SDL_CreateWindow("wolf3d", SDL_WINDOWPOS_UNDEFINED,
 		SDL_WINDOWPOS_UNDEFINED, SCR_WIDTH, SCR_HEIGHT,
 		SDL_WINDOW_SHOWN)))
 		return (1);
-	if (!(*renderer = SDL_CreateRenderer(*window, -1, 0)))
+	if (!(drw->renderer = SDL_CreateRenderer(drw->window, -1, 0)))
 		return (1);
-	if (!(*texture = SDL_CreateTexture(*renderer, 
+	if (!(drw->texture = SDL_CreateTexture(drw->renderer,
 		SDL_PIXELFORMAT_ARGB8888,
 		SDL_TEXTUREACCESS_TARGET,
 		SCR_WIDTH, SCR_HEIGHT)))
@@ -63,33 +62,27 @@ int		main(void)
 {
 	Uint32			*img_arr;
 	SDL_Surface		*textures[TEXTURE_NUM];
-	SDL_Window		*window;
-	SDL_Texture		*texture;
-	SDL_Renderer	*renderer;
+	t_drawer		drw;
 	t_player		plr;
 	t_byte			**map;
 
 	if (!(map = read_map()))
-		return (1);  				//normalnyi vixod sdelai
+		return (1);
 	if (!(open_textures(textures)))
 		return (1);
-	init_player(&plr);	
-	if(SDL_Init(SDL_INIT_VIDEO) < 0)
+	init_player(&plr);
+	if (SDL_Init(SDL_INIT_VIDEO) < 0)
 		return (1);
 	if (!(img_arr = malloc(sizeof(Uint32) * SCR_WIDTH * SCR_HEIGHT)))
 		return (1);
-	if (init_sdl_stuff(&window, &texture, &renderer))
+	if (init_sdl_stuff(&drw))
 		return (1);
-
-	while (1)//while update_game
+	while (!(update_game(&plr, map)))
 	{
-		if (update_game(&plr, map))
-			exit(1);
-		img_arr = update_img(plr, img_arr, map, textures);// V WHILE
-		update_window(img_arr, texture, renderer);
+		img_arr = update_img(plr, img_arr, map, textures);
+		update_window(img_arr, drw.texture, drw.renderer);
 	}
-
-	SDL_DestroyWindow(window);
+	SDL_DestroyWindow(drw.window);
 	SDL_Quit();
 	return (0);
- }
+}

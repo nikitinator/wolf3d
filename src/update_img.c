@@ -6,7 +6,7 @@
 /*   By: snikitin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/18 19:04:05 by snikitin          #+#    #+#             */
-/*   Updated: 2018/05/21 20:14:14 by snikitin         ###   ########.fr       */
+/*   Updated: 2018/05/22 12:33:23 by snikitin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,18 +48,16 @@ Uint32		*update_img(t_player plr, Uint32 *img_arr,
 	t_hitpoint	obst;
 	t_obst_drw	obst_drw;
 	double		to_rotate;
-	double		dtpp;
 
 	ray_dir = vec_rotate(plr.dir, RADIAN(-(plr.fov / 2)));
 	to_rotate = RADIAN((double)plr.fov / (double)SCR_WIDTH);
-	dtpp = (SCR_WIDTH / 2) / TAN30;
 	x = 0;
 	while (x < SCR_WIDTH)
 	{
 		obst = cast_ray(plr.pos, ray_dir, map);
 		obst.dist = obst.dist * vec_dot_product(plr.dir, ray_dir);
-		obst_drw = get_obst_drw(dtpp, obst, textures);
-		draw_ceil_floor((t_fc_drw){plr, dtpp, obst_drw.from, obst_drw.to,
+		obst_drw = get_obst_drw(DTPP, obst, textures);
+		draw_ceil_floor((t_fc_drw){plr, DTPP, obst_drw.from, obst_drw.to,
 				ray_dir, x, textures, img_arr});
 		draw_obstacle(obst_drw, x, img_arr);
 		ray_dir = vec_rotate(ray_dir, to_rotate);
