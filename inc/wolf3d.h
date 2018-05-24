@@ -6,7 +6,7 @@
 /*   By: snikitin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/09 14:21:53 by snikitin          #+#    #+#             */
-/*   Updated: 2018/05/23 16:24:40 by snikitin         ###   ########.fr       */
+/*   Updated: 2018/05/24 11:56:42 by snikitin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@
 # define MOSSY 4
 # define PURPLESTONE 5
 # define REDBRICK 6
-# define WOOD 7
+# define CEILING 7
 
 # define BLUESTONE_PATH "./res/pics/bluestone.bmp"
 # define COLORSTONE_PATH "./res/pics/colorstone.bmp"
@@ -59,7 +59,7 @@
 # define MOSSY_PATH "./res/pics/mossy.bmp"
 # define PURPLESTONE_PATH "./res/pics/purplestone.bmp"
 # define REDBRICK_PATH "./res/pics/redbrick.bmp"
-# define WOOD_PATH "./res/pics/ceiling.bmp"
+# define CEILING_PATH "./res/pics/ceiling.bmp"
 # define MAP_PATH "./res/map.txt"
 
 # define SET_PIX(x, y, i, c) i[x + y * SCR_WIDTH] = c

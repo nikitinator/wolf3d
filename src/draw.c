@@ -6,7 +6,7 @@
 /*   By: snikitin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 18:01:34 by snikitin          #+#    #+#             */
-/*   Updated: 2018/05/21 18:01:38 by snikitin         ###   ########.fr       */
+/*   Updated: 2018/05/24 11:58:42 by snikitin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	draw_ceil_floor(t_fc_drw fc_drw)
 		floor[X] -= (int)floor[X];
 		floor[Y] -= (int)floor[Y];
 		SET_PIX(fc_drw.x, y_ceiling, fc_drw.img_arr,
-				get_pix_txt(fc_drw.textures[WOOD], floor[X], floor[Y]));
+				get_pix_txt(fc_drw.textures[CEILING], floor[X], floor[Y]));
 		SET_PIX(fc_drw.x, y_floor, fc_drw.img_arr,
 				get_pix_txt(fc_drw.textures[GREYSTONE], floor[X], floor[Y]));
 		y_ceiling--;

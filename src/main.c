@@ -6,7 +6,7 @@
 /*   By: snikitin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/07 18:21:36 by snikitin          #+#    #+#             */
-/*   Updated: 2018/05/23 15:47:56 by snikitin         ###   ########.fr       */
+/*   Updated: 2018/05/24 11:58:23 by snikitin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int		open_textures(SDL_Surface **texture)
 		return (0);
 	if (!(texture[REDBRICK] = SDL_LoadBMP(REDBRICK_PATH)))
 		return (0);
-	if (!(texture[WOOD] = SDL_LoadBMP(WOOD_PATH)))
+	if (!(texture[CEILING] = SDL_LoadBMP(CEILING_PATH)))
 		return (0);
 	return (1);
 }
