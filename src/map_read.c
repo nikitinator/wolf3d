@@ -6,7 +6,7 @@
 /*   By: snikitin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/16 17:25:28 by snikitin          #+#    #+#             */
-/*   Updated: 2018/05/22 17:47:03 by snikitin         ###   ########.fr       */
+/*   Updated: 2018/05/30 16:41:42 by snikitin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static t_byte	**create_arr(t_list *begin_list, size_t row, size_t col)
 	return (map);
 }
 
-t_byte			**read_map(void)
+t_byte			**map_read(void)
 {
 	int		fd;
 	t_byte	**map;
@@ -56,9 +56,9 @@ t_byte			**read_map(void)
 		ft_putendl_fd("map.txt not found", 2);
 		return (NULL);
 	}
-	if (!(map_list = get_map_list(fd, &col_num, &row_num)))
+	if (!(map_list = map_get_list(fd, &col_num, &row_num)))
 		return (NULL);
 	map = create_arr(map_list, row_num, col_num);
 	ft_lstdel(&map_list, del_content);
-	return (validate_map(map, row_num, col_num));
+	return (map_validate(map, row_num, col_num));
 }

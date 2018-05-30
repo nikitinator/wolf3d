@@ -6,7 +6,7 @@
 /*   By: snikitin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/09 14:21:53 by snikitin          #+#    #+#             */
-/*   Updated: 2018/05/24 11:56:42 by snikitin         ###   ########.fr       */
+/*   Updated: 2018/05/30 17:00:12 by snikitin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,9 +115,9 @@ typedef struct	s_hitpoint
 /*
 ** 		Init and read files.
 */
-t_byte			**read_map(void);
-t_list			*get_map_list(int fd, size_t *col_n, size_t *row_n);
-t_byte			**validate_map(t_byte **map, size_t row, size_t col);
+t_byte			**map_read(void);
+t_list			*map_get_list(int fd, size_t *col_n, size_t *row_n);
+t_byte			**map_validate(t_byte **map, size_t row, size_t col);
 void			list_free(t_list *list);
 void			del_content(void *content, size_t content_size);
 

@@ -6,7 +6,7 @@
 /*   By: snikitin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/07 18:21:36 by snikitin          #+#    #+#             */
-/*   Updated: 2018/05/24 11:58:23 by snikitin         ###   ########.fr       */
+/*   Updated: 2018/05/30 16:40:43 by snikitin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int		main(void)
 	t_player		plr;
 	t_byte			**map;
 
-	if (!(map = read_map()))
+	if (!(map = map_read()))
 		return (1);
 	if (!(open_textures(textures)))
 		return (1);

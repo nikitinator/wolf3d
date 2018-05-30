@@ -6,7 +6,7 @@
 /*   By: snikitin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 18:01:34 by snikitin          #+#    #+#             */
-/*   Updated: 2018/05/24 11:58:42 by snikitin         ###   ########.fr       */
+/*   Updated: 2018/05/30 16:17:29 by snikitin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	draw_ceil_floor(t_fc_drw fc_drw)
 	t_vector_2	floor;
 
 	y_floor = fc_drw.to_txt;
-	y_ceiling = fc_drw.from_txt - 1;
+	y_ceiling = fc_drw.from_txt;
 	while (y_floor < SCR_HEIGHT || y_ceiling > 0)
 	{
 		dist = fc_drw.dtpp * PLAYER_HEIGHT / (y_floor - SCR_HEIGHT / 2);

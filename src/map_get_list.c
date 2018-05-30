@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_map_list.c                                     :+:      :+:    :+:   */
+/*   map_get_list.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: snikitin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/22 13:12:39 by snikitin          #+#    #+#             */
-/*   Updated: 2018/05/23 15:39:11 by snikitin         ###   ########.fr       */
+/*   Created: 2018/05/30 16:41:02 by snikitin          #+#    #+#             */
+/*   Updated: 2018/05/30 16:59:53 by snikitin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,14 +50,14 @@ static t_list	*validate_list(t_list *list, size_t *col)
 {
 	if (validate_col(list, *col))
 	{
-		ft_putendl_fd("Invalid map LIST", 2);
+		ft_putendl_fd("Invalid map.", 2);
 		list_free(list);
 		return (NULL);
 	}
 	return (list);
 }
 
-t_list			*get_map_list(int fd, size_t *col, size_t *row)
+t_list			*map_get_list(int fd, size_t *col, size_t *row)
 {
 	char	*line;
 	char	**split;
@@ -69,12 +69,17 @@ t_list			*get_map_list(int fd, size_t *col, size_t *row)
 		split = ft_strsplit(line, ' ');
 		free(line);
 		ft_list_push_back(&list, &split, sizeof(char **));
-		if (!split[0] || !split[0][0])
+		if (!split || !split[0] || !split[0][0])
 		{
-			ft_putendl_fd("Invalid map LIST", 2);
+			ft_putendl_fd("Invalid map.", 2);
 			list_free(list);
 			return (NULL);
 		}
+	}
+	if (!list)
+	{
+		ft_putendl_fd("Invalid map.", 2);
+		return (NULL);
 	}
 	get_col_row(list, col, row);
 	return (validate_list(list, col));

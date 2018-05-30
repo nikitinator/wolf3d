@@ -6,7 +6,7 @@
 /*   By: snikitin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/18 19:04:05 by snikitin          #+#    #+#             */
-/*   Updated: 2018/05/22 12:33:23 by snikitin         ###   ########.fr       */
+/*   Updated: 2018/05/29 17:53:42 by snikitin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,11 @@ t_obst_drw	get_obst_drw(double dtpp, t_hitpoint obst, SDL_Surface **textures)
 	if (obst.type == 3)
 	{
 		if (obst.card_dir == NORTH)
-			obst_drw.txt = textures[4];
+			obst_drw.txt = textures[MOSSY];
 		else if (obst.card_dir == WEST)
-			obst_drw.txt = textures[5];
+			obst_drw.txt = textures[PURPLESTONE];
 		else if (obst.card_dir == EAST)
-			obst_drw.txt = textures[6];
+			obst_drw.txt = textures[REDBRICK];
 		else if (obst.card_dir == SOUTH)
 			obst_drw.txt = textures[BLUESTONE];
 	}

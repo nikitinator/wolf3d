@@ -6,7 +6,7 @@
 /*   By: snikitin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/22 17:32:33 by snikitin          #+#    #+#             */
-/*   Updated: 2018/05/23 15:40:09 by snikitin         ###   ########.fr       */
+/*   Updated: 2018/05/30 16:42:27 by snikitin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,14 +74,14 @@ static void		free_map(t_byte **map, size_t row_num)
 	free(map);
 }
 
-t_byte			**validate_map(t_byte **map, size_t row_num, size_t col_num)
+t_byte			**map_validate(t_byte **map, size_t row_num, size_t col_num)
 {
 	if (validate_borders(map, row_num, col_num)
 			|| validate_values(map, row_num, col_num)
 				|| validate_spawn(map))
 	{
 		free_map(map, row_num);
-		ft_putendl_fd("Invalid map READ.", 2);
+		ft_putendl_fd("Invalid map.", 2);
 		return (NULL);
 	}
 	return (map);
