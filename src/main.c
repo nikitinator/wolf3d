@@ -6,7 +6,7 @@
 /*   By: snikitin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/07 18:21:36 by snikitin          #+#    #+#             */
-/*   Updated: 2018/05/30 16:40:43 by snikitin         ###   ########.fr       */
+/*   Updated: 2018/06/06 12:53:53 by snikitin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,22 +39,18 @@ int		init_sdl_stuff(t_drawer *drw)
 
 int		open_textures(SDL_Surface **texture)
 {
-	if (!(texture[BLUESTONE] = SDL_LoadBMP(BLUESTONE_PATH)))
+	if ((!(texture[BLUESTONE] = SDL_LoadBMP(BLUESTONE_PATH)))
+		|| (!(texture[COLORSTONE] = SDL_LoadBMP(COLORSTONE_PATH)))
+		|| (!(texture[EAGLE] = SDL_LoadBMP(EAGLE_PATH)))
+		|| (!(texture[GREYSTONE] = SDL_LoadBMP(GREYSTONE_PATH)))
+		|| (!(texture[MOSSY] = SDL_LoadBMP(MOSSY_PATH)))
+		|| (!(texture[PURPLESTONE] = SDL_LoadBMP(PURPLESTONE_PATH)))
+		|| (!(texture[REDBRICK] = SDL_LoadBMP(REDBRICK_PATH)))
+		|| (!(texture[CEILING] = SDL_LoadBMP(CEILING_PATH))))
+	{
+		ft_putendl_fd("Error while opening tetures.", 2);
 		return (0);
-	if (!(texture[COLORSTONE] = SDL_LoadBMP(COLORSTONE_PATH)))
-		return (0);
-	if (!(texture[EAGLE] = SDL_LoadBMP(EAGLE_PATH)))
-		return (0);
-	if (!(texture[GREYSTONE] = SDL_LoadBMP(GREYSTONE_PATH)))
-		return (0);
-	if (!(texture[MOSSY] = SDL_LoadBMP(MOSSY_PATH)))
-		return (0);
-	if (!(texture[PURPLESTONE] = SDL_LoadBMP(PURPLESTONE_PATH)))
-		return (0);
-	if (!(texture[REDBRICK] = SDL_LoadBMP(REDBRICK_PATH)))
-		return (0);
-	if (!(texture[CEILING] = SDL_LoadBMP(CEILING_PATH)))
-		return (0);
+	}
 	return (1);
 }
 
