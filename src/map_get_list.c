@@ -6,7 +6,7 @@
 /*   By: snikitin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/30 16:41:02 by snikitin          #+#    #+#             */
-/*   Updated: 2018/05/30 16:59:53 by snikitin         ###   ########.fr       */
+/*   Updated: 2018/06/07 16:05:11 by snikitin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,10 @@ static int		validate_col(t_list *list, size_t col)
 	return (0);
 }
 
-static t_list	*validate_list(t_list *list, size_t *col)
+static t_list	*validate_list(t_list *list, size_t col, size_t row)
 {
-	if (validate_col(list, *col))
+	if ((row > MAX_MAP_WIDTH || col > MAX_MAP_HEIGHT)
+			|| validate_col(list, col))
 	{
 		ft_putendl_fd("Invalid map.", 2);
 		list_free(list);
@@ -82,5 +83,5 @@ t_list			*map_get_list(int fd, size_t *col, size_t *row)
 		return (NULL);
 	}
 	get_col_row(list, col, row);
-	return (validate_list(list, col));
+	return (validate_list(list, *col, *row));
 }

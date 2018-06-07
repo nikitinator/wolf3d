@@ -6,7 +6,7 @@
 /*   By: snikitin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/09 14:21:53 by snikitin          #+#    #+#             */
-/*   Updated: 2018/05/30 17:00:12 by snikitin         ###   ########.fr       */
+/*   Updated: 2018/06/07 16:06:02 by snikitin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@
 # define SCR_WIDTH 1680
 # define SCR_HEIGHT 1050
 # define SCR_BPP 32
+# define MAX_MAP_WIDTH 200
+# define MAX_MAP_HEIGHT 200
 
 # define PLAYER_HEIGHT 0.5
 # define MOV_COEFF 0.25
