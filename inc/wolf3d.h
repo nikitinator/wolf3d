@@ -6,7 +6,7 @@
 /*   By: snikitin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/09 14:21:53 by snikitin          #+#    #+#             */
-/*   Updated: 2018/06/07 16:06:02 by snikitin         ###   ########.fr       */
+/*   Updated: 2018/06/10 15:54:55 by snikitin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,6 @@
 
 # define X 0
 # define Y 1
-
-# define RR 0
-# define GG 1
-# define BB 2
 
 # define TEXTURE_NUM 8
 
