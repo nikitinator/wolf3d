@@ -6,7 +6,7 @@
 #    By: snikitin <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/02/07 17:36:11 by snikitin          #+#    #+#              #
-#    Updated: 2018/05/30 16:38:55 by snikitin         ###   ########.fr        #
+#    Updated: 2018/06/13 20:08:51 by snikitin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,7 +44,7 @@ SDL_DIR = $(FRM_DIR)SDL2.framework/
 SDL_INC = $(SDL_DIR)Headers/
 SDL_FLAGS = $(SDL) -rpath $(FRM_DIR)
 
-CC_FLAGS := -Wall -Wextra -Werror
+CC_FLAGS := -Wall -Wextra -Werror -pedantic
 LINK_FLAGS := $(LIBFT_FLAGS) $(SDL_FLAGS)
 HEADER_FLAGS := -I $(LIBFT_INC) -I $(SDL_INC) -I $(INC_DIR)
 
