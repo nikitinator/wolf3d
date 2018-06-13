@@ -6,7 +6,7 @@
 /*   By: snikitin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/30 16:41:02 by snikitin          #+#    #+#             */
-/*   Updated: 2018/06/07 16:05:11 by snikitin         ###   ########.fr       */
+/*   Updated: 2018/06/13 15:46:04 by snikitin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,8 @@ static int		validate_col(t_list *list, size_t col)
 
 static t_list	*validate_list(t_list *list, size_t col, size_t row)
 {
-	if ((row > MAX_MAP_WIDTH || col > MAX_MAP_HEIGHT)
+	if ((col > MAX_MAP_WIDTH || row > MAX_MAP_HEIGHT)
+		|| (col < MIN_MAP_WIDTH || row < MIN_MAP_HEIGHT)
 			|| validate_col(list, col))
 	{
 		ft_putendl_fd("Invalid map.", 2);
