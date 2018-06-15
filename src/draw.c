@@ -6,7 +6,7 @@
 /*   By: snikitin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 18:01:34 by snikitin          #+#    #+#             */
-/*   Updated: 2018/06/13 20:10:50 by snikitin         ###   ########.fr       */
+/*   Updated: 2018/06/15 12:22:15 by snikitin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 Uint32	get_pix_txt(SDL_Surface *texture, double x_ratio, double y_ratio)
 {
-	return (*(Uint32 *)((int *)texture->pixels
+	return (*(Uint32 *)((char *)texture->pixels
 				+ (int)((texture->w - 1) * x_ratio) * 3
 				+ (int)((texture->h - 1) * y_ratio) * texture->pitch));
 }
