@@ -6,7 +6,7 @@
 #    By: snikitin <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/02/07 17:36:11 by snikitin          #+#    #+#              #
-#    Updated: 2018/06/13 20:08:51 by snikitin         ###   ########.fr        #
+#    Updated: 2018/07/01 15:24:42 by snikitin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,7 +42,7 @@ LIBFT_FLAGS :=  -lft -L $(LIBFT_DIR)
 SDL = $(SDL_DIR)SDL2
 SDL_DIR = $(FRM_DIR)SDL2.framework/
 SDL_INC = $(SDL_DIR)Headers/
-SDL_FLAGS = $(SDL) -rpath $(FRM_DIR)
+SDL_FLAGS = -framework SDL2 -F $(FRM_DIR)
 
 CC_FLAGS := -Wall -Wextra -Werror -pedantic
 LINK_FLAGS := $(LIBFT_FLAGS) $(SDL_FLAGS)
