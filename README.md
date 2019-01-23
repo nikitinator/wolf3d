@@ -1,6 +1,6 @@
 # wolf3d
 
-![](https://imgur.com/a/lXXs8fY)
+![](https://i.imgur.com/0qS6i0X.gifv)
 
 ## Dependencies
 
