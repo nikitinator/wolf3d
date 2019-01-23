@@ -1,6 +1,6 @@
 # wolf3d
 
-![](https://i.imgur.com/0qS6i0X.gif)
+![](res/wolf3d_screencap.gif)
 
 ## Dependencies
 
