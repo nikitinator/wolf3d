@@ -6,3 +6,8 @@
 
 - [gcc]
 - [make]
+
+## Building (MacOS)
+```console
+make
+```
